@@ -1,12 +1,12 @@
-const inputBox = document.querySelector('.input-box');
-const searchBtn = document.getElementById('searchBtn');
-const weather_img = document.querySelector('.weather-img');
-const temperature = document.querySelector('.temperature');
-const description = document.querySelector('.description');
-const humidity = document.getElementById('humidity');
-const wind_speed = document.getElementById('wind-speed');
-const location_not_found = document.querySelector('.location-not-found');
-const weather_body = document.querySelector('.weather-body');
+const inputBox = document.querySelector(".input-box");
+const searchBtn = document.getElementById("searchBtn");
+const weather_img = document.querySelector(".weather-img");
+const temperature = document.querySelector(".temperature");
+const description = document.querySelector(".description");
+const humidity = document.getElementById("humidity");
+const wind_speed = document.getElementById("wind-speed");
+const location_not_found = document.querySelector(".location-not-found");
+const weather_body = document.querySelector(".weather-body");
 
 async function checkWeather(city) {
     const api_key = "150c348bb4e2fa1d250361c6b272aae6";
@@ -15,17 +15,21 @@ async function checkWeather(city) {
     try {
         const response = await fetch(url);
         const weather_data = await response.json();
+        // console.log("Full API Response:", weather_data);
 
-        if (weather_data.cod === '404') {
+
+        if (response.status !== 200 || !weather_data.weather || !Array.isArray(weather_data.weather)) {
             location_not_found.style.display = "flex";
             weather_body.style.display = "none";
-            console.log("Location not found");
+            console.log("Location not found or invalid data");
             return;
         }
 
-        console.log("Weather data received");
+        console.log(weather_data.weather[0].main);
+
         location_not_found.style.display = "none";
         weather_body.style.display = "flex";
+
         temperature.innerHTML = `${Math.round(weather_data.main.temp - 273.15)}°C`;
         description.innerHTML = `${weather_data.weather[0].description}`;
         humidity.innerHTML = `${weather_data.main.humidity}%`;
@@ -52,17 +56,17 @@ async function checkWeather(city) {
                 break;
         }
 
-        console.log(weather_data);
     } catch (error) {
         console.error("Error fetching the weather data: ", error);
     }
 }
 
-searchBtn.addEventListener('click', () => {
-    const city = inputBox.value.trim();
-    if (city) {
-        checkWeather(city);
-    } else {
-        alert("Please enter a city name.");
-    }
+
+searchBtn.addEventListener("click", () => {
+  const city = inputBox.value.trim();
+  if (city) {
+    checkWeather(city);
+  } else {
+    alert("Please enter a city name.");
+  }
 });

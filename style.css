@@ -11,7 +11,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
+    padding: 20px;
 }
 .container{
     width: 400px;
@@ -133,4 +135,88 @@ body{
 }
 .location-not-found img{
     width: 80%;
+}
+
+
+/* ===== Responsive Design ===== */
+
+/* Tablets (width ≤ 768px) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .search-box input {
+        font-size: 18px;
+        padding: 10px 14px;
+    }
+
+    .search-box button {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+
+    .weather-box .temperature {
+        font-size: 36px;
+    }
+
+    .weather-box .description {
+        font-size: 18px;
+    }
+
+    .weather-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .humidity, .wind {
+        margin: 10px 0;
+    }
+
+    .weather-details i {
+        font-size: 28px;
+    }
+
+    .text span {
+        font-size: 18px;
+    }
+
+    .text p {
+        font-size: 14px;
+    }
+}
+
+/* Mobile Devices (width ≤ 480px) */
+@media (max-width: 480px) {
+    .search-box {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .search-box button {
+        width: 100%;
+        border-radius: 14px;
+    }
+
+    .weather-img {
+        width: 80%;
+    }
+
+    .weather-box .temperature {
+        font-size: 32px;
+    }
+
+    .weather-box .description {
+        font-size: 16px;
+    }
+
+    .weather-details .text {
+        text-align: center;
+    }
 }
